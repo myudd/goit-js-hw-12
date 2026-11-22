@@ -15,11 +15,12 @@ const galleryBox = new SimpleLightbox('.gallery a',
             captionDelay: 250
         }
     );
-export const createGallery = async (images) => {
+export const createGallery = (images) => {
     
-    const markup = await images.map(
+    const markup = images.map(
     (img) => `
-  <a class="gallery-link" href="${img.largeImageURL}"><li class="gallery-item">
+  <li class="gallery-item">
+  <a class="gallery-link" href="${img.largeImageURL}">
     <img
       class="gallery-image"
       src="${img.webformatURL}"
@@ -43,8 +44,9 @@ export const createGallery = async (images) => {
             <p>${img.downloads}</p>
         </li>
     </ul>
+    </a>
     </li>
-</a>
+
 `,
   )
         .join("");

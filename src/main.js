@@ -57,19 +57,28 @@ async function fetchAndRenderGallery() {
     try {
         showLoader();
         const images = await getImagesByQuery(req, page);
-        if (images.hits.length === 0) {
+
+        
+        if (images.totalHits === 0) {
+            iziToast.error(getError)
             hideLoadMoreButton();
+            hideLoader();
+            return;
+        } 
+
+
+        createGallery(images.hits);
+        if (page * perPage >= images.totalHits) {
             hideLoader();
             iziToast.info(
                 { position: "topRight", message: "We're sorry, but you've reached the end of search results." }
             );
-            return;
+        } else {
+            hideLoader(); 
+            showLoadMoreButton();
         }
-        createGallery(images.hits);
-        hideLoader(); 
-        showLoadMoreButton();
                     
-    } catch (error) { iziToast.error(getError) }
+    } catch (error) { hideLoader(); iziToast.error(getError) }
 }
 
 

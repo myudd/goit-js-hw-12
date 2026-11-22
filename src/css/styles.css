@@ -42,7 +42,7 @@ button {
   font-family: Montserrat, sans-serif;
 }
 button.add-more{
-  margin: 0 auto;
+  margin: 0 auto 44px auto;
   width: fit-content;
   display: none;
 }
